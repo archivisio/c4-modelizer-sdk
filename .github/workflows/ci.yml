@@ -50,11 +50,4 @@ jobs:
           npm pack --dry-run
           echo "📦 Package contents:"
           npm pack --dry-run 2>/dev/null | grep -E "^\s+\w" || true
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
-          retention-days: 7
         
