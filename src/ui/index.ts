@@ -1,2 +1,2 @@
-// Contextes
+// Contexts
 export * from './contexts';

@@ -1,6 +1,6 @@
-// Export principal du SDK C4 Modelizer
-// Types, store et hooks core
+// Main export for C4 Modelizer SDK
+// Types, store and core hooks
 export * from './core';
 
-// Composants UI et contextes
+// UI components and contexts
 export * from './ui';

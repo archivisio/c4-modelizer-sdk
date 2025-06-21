@@ -1,34 +1,34 @@
 ## Description
 
-Décrivez brièvement les changements apportés dans cette PR.
+Briefly describe the changes made in this PR.
 
-## Type de changement
+## Type of Change
 
-- [ ] 🐛 Bug fix (changement qui corrige un problème)
-- [ ] ✨ Nouvelle fonctionnalité (changement qui ajoute une fonctionnalité)
-- [ ] 💥 Breaking change (fix ou feature qui casserait la compatibilité existante)
-- [ ] 📚 Documentation (changements dans la documentation uniquement)
-- [ ] 🔧 Maintenance (refactoring, mise à jour des dépendances, etc.)
+- [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
+- [ ] ✨ New feature (non-breaking change which adds functionality)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 📚 Documentation (changes to documentation only)
+- [ ] 🔧 Maintenance (refactoring, dependency updates, etc.)
 
 ## Checklist
 
-- [ ] Le code suit les conventions du projet
-- [ ] J'ai effectué une auto-review de mon code
-- [ ] J'ai testé mes changements localement
-- [ ] Les tests passent (`npm run type-check` et `npm run lint`)
-- [ ] Le build fonctionne (`npm run build`)
-- [ ] J'ai mis à jour la documentation si nécessaire
+- [ ] Code follows the project's style guidelines
+- [ ] I have performed a self-review of my code
+- [ ] I have tested my changes locally
+- [ ] Tests pass (`npm run type-check` and `npm run lint`)
+- [ ] Build works (`npm run build`)
+- [ ] I have updated documentation if necessary
 
-## Tests
+## Testing
 
-Décrivez comment vous avez testé vos changements.
+Describe how you tested your changes.
 
-## Impact sur les versions
+## Version Impact
 
 - [ ] Patch (1.0.x) - Bug fixes
-- [ ] Minor (1.x.0) - Nouvelles fonctionnalités compatibles
+- [ ] Minor (1.x.0) - New backwards-compatible features
 - [ ] Major (x.0.0) - Breaking changes
 
-## Captures d'écran (si applicable)
+## Screenshots (if applicable)
 
-Si vos changements incluent des modifications visuelles, ajoutez des captures d'écran.
+If your changes include visual modifications, add screenshots.

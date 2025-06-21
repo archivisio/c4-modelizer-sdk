@@ -1,20 +1,20 @@
 # C4 Modelizer SDK
 
-SDK partagé pour les applications C4 Modelizer - Types, store Zustand et hooks réutilisables.
+Shared SDK for C4 Modelizer applications - Types, Zustand store and reusable hooks.
 
 ## Installation
 
-### Depuis GitHub Packages
+### From GitHub Packages
 
 ```bash
-# Configuration du registre GitHub (une seule fois)
-npm config set @eth3rnit3:registry https://npm.pkg.github.com
+# Configure GitHub registry (one time setup)
+npm config set @archivisio:registry https://npm.pkg.github.com
 
-# Installation du package
-npm install @eth3rnit3/c4-modelizer-sdk
+# Install the package
+npm install @archivisio/c4-modelizer-sdk
 ```
 
-### Depuis NPM (futur)
+### From NPM (future)
 
 ```bash
 npm install c4-modelizer-sdk
@@ -22,29 +22,29 @@ npm install c4-modelizer-sdk
 
 ## Peer Dependencies
 
-Le SDK nécessite les dépendances suivantes dans votre projet :
+The SDK requires the following dependencies in your project:
 
 ```bash
 npm install react react-dom zustand @xyflow/react
 ```
 
-## Structure du SDK
+## SDK Structure
 
 ```
 c4-modelizer-sdk/
 ├── src/
-│   ├── core/           # Types, store, hooks core
-│   │   ├── types/      # Types C4 fondamentaux
-│   │   ├── store/      # Store Zustand
-│   │   └── hooks/      # Hooks métier
-│   ├── ui/             # Composants UI et contextes
-│   │   └── contexts/   # Contextes React
-│   └── utils/          # Utilitaires
+│   ├── core/           # Types, store, core hooks
+│   │   ├── types/      # Core C4 types
+│   │   ├── store/      # Zustand store
+│   │   └── hooks/      # Business hooks
+│   ├── ui/             # UI components and contexts
+│   │   └── contexts/   # React contexts
+│   └── utils/          # Utilities
 ```
 
-## Utilisation
+## Usage
 
-### Import principal
+### Main import
 
 ```typescript
 import { 
@@ -70,24 +70,24 @@ import {
   // UI
   DialogProvider,
   useDialogs
-} from '@eth3rnit3/c4-modelizer-sdk';
+} from '@archivisio/c4-modelizer-sdk';
 ```
 
-### Import sélectif
+### Selective imports
 
 ```typescript
-// Core uniquement
-import { useFlatC4Store, useFlatModelActions } from '@eth3rnit3/c4-modelizer-sdk/core';
+// Core only
+import { useFlatC4Store, useFlatModelActions } from '@archivisio/c4-modelizer-sdk/core';
 
-// UI uniquement
-import { DialogProvider, useDialogs } from '@eth3rnit3/c4-modelizer-sdk/ui';
+// UI only
+import { DialogProvider, useDialogs } from '@archivisio/c4-modelizer-sdk/ui';
 ```
 
 ## API Documentation
 
-### Store Zustand
+### Zustand Store
 
-Le store principal pour gérer l'état du modèle C4 :
+The main store for managing C4 model state:
 
 ```typescript
 const {
@@ -96,15 +96,15 @@ const {
   updateSystem,
   removeSystem,
   setActiveSystem,
-  // ... autres actions
+  // ... other actions
 } = useFlatC4Store();
 ```
 
-### Hooks principaux
+### Main Hooks
 
 #### useFlatModelActions
 
-Hook pour les actions CRUD sur les éléments C4 :
+Hook for CRUD actions on C4 elements:
 
 ```typescript
 const {
@@ -114,19 +114,19 @@ const {
   resetStore
 } = useFlatModelActions();
 
-// Ajouter un élément au niveau actuel
-addElement({ name: "Mon Système" });
+// Add element at current level
+addElement({ name: "My System" });
 
-// Ajouter avec labels personnalisés
+// Add with custom labels
 addElement({}, { 
-  system: "Nouveau Système",
-  container: "Nouveau Container" 
+  system: "New System",
+  container: "New Container" 
 });
 ```
 
 #### useFlatNavigation
 
-Hook pour la navigation entre les niveaux C4 :
+Hook for navigation between C4 levels:
 
 ```typescript
 const {
@@ -136,13 +136,13 @@ const {
   navigateToCode
 } = useFlatNavigation();
 
-// Navigation vers un container
+// Navigate to a container
 navigateToContainer(systemId);
 ```
 
 #### useFlatNodes
 
-Hook pour ReactFlow, génère les nodes pour le niveau actuel :
+Hook for ReactFlow, generates nodes for current level:
 
 ```typescript
 const {
@@ -152,13 +152,13 @@ const {
 } = useFlatNodes({
   onEditSystem: (id) => console.log('Edit system', id),
   onEditContainer: (id) => console.log('Edit container', id),
-  // ... autres callbacks
+  // ... other callbacks
 });
 ```
 
 #### useFlatEdges
 
-Hook pour ReactFlow, génère les edges (connexions) :
+Hook for ReactFlow, generates edges (connections):
 
 ```typescript
 const {
@@ -172,11 +172,11 @@ const {
 });
 ```
 
-### Contextes UI
+### UI Contexts
 
 #### DialogProvider
 
-Provider pour gérer les dialogs d'édition :
+Provider for managing edit dialogs:
 
 ```typescript
 function App() {
@@ -187,7 +187,7 @@ function App() {
   );
 }
 
-// Dans un composant enfant
+// In a child component
 const {
   openEditDialog,
   openConnectionDialog,
@@ -196,7 +196,7 @@ const {
 } = useDialogs();
 ```
 
-## Exemple d'intégration
+## Integration Example
 
 ```typescript
 import React from 'react';
@@ -207,7 +207,7 @@ import {
   useFlatEdges,
   DialogProvider,
   useDialogs
-} from '@eth3rnit3/c4-modelizer-sdk';
+} from '@archivisio/c4-modelizer-sdk';
 import { ReactFlow } from '@xyflow/react';
 
 function C4ModelizerApp() {
@@ -227,7 +227,7 @@ function C4ModelizerApp() {
   return (
     <div style={{ height: '100vh' }}>
       <button onClick={handleAddElement}>
-        Ajouter un élément
+        Add Element
       </button>
       
       <ReactFlow
@@ -253,7 +253,7 @@ function App() {
 export default App;
 ```
 
-## Types principaux
+## Core Types
 
 ### BaseBlock
 
@@ -275,7 +275,7 @@ interface BaseBlock {
 
 ### SystemBlock, ContainerBlock, ComponentBlock, CodeBlock
 
-Interfaces étendant BaseBlock avec des propriétés spécifiques à chaque niveau.
+Interfaces extending BaseBlock with specific properties for each level.
 
 ### FlatC4Model
 
@@ -292,16 +292,16 @@ interface FlatC4Model {
 }
 ```
 
-## Développement
+## Development
 
 ```bash
-# Installation des dépendances
+# Install dependencies
 npm install
 
-# Build du SDK
+# Build SDK
 npm run build
 
-# Développement avec watch
+# Development with watch
 npm run dev
 
 # Linting

@@ -1,12 +1,12 @@
 {
   "name": "c4-modelizer-sdk",
   "version": "1.0.0",
-  "description": "SDK partagé pour les applications C4 Modelizer - Types, store Zustand et hooks réutilisables",
+  "description": "Shared SDK for C4 Modelizer applications - Types, Zustand store and reusable hooks",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "author": "eth3rnit3",
+  "author": "archivisio",
   "license": "CC-BY-NC-4.0",
   "exports": {
     ".": {

@@ -1,4 +1,4 @@
-// Types C4 fondamentaux
+// Core C4 types
 export type {
   Position,
   BaseBlock,
@@ -12,14 +12,14 @@ export type {
   C4Model
 } from './c4';
 
-// Types de connexions
+// Connection types
 export type {
   ConnectionInfo,
   ConnectionData,
   ConnectionEditDialogProps
 } from './connection';
 
-// Types de modèle aplati
+// Flat model types
 export type {
   FlatSystemBlock,
   FlatContainerBlock,

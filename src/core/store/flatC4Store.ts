@@ -47,7 +47,7 @@ interface FlatC4State {
   setModel: (model: FlatC4Model) => void;
 }
 
-/** Les blocs peuvent porter un champ { original: { id: string } } */
+/** Blocks can have an { original: { id: string } } field */
 type WithOriginal = { id: string; original?: { id: string } };
 
 const omitType = <T extends { type?: unknown }>(obj: Partial<T>) => {
@@ -56,7 +56,7 @@ const omitType = <T extends { type?: unknown }>(obj: Partial<T>) => {
   return rest as Omit<typeof rest, 'type'>;
 };
 
-/** Propage les changements vers toutes les copies d'un original */
+/** Propagates changes to all copies of an original */
 const propagateUpdate = <T extends WithOriginal>(
   items: T[],
   originalId: string,
@@ -66,7 +66,7 @@ const propagateUpdate = <T extends WithOriginal>(
     i.original?.id === originalId ? { ...i, ...changes } : i,
   );
 
-/** Supprime l'original et toutes ses copies */
+/** Removes the original and all its copies */
 const filterOriginalAndCopies = <T extends WithOriginal>(
   items: T[],
   originalId: string,
@@ -85,7 +85,7 @@ export const useFlatC4Store = create<FlatC4State>()(
           viewLevel: 'system'
         },
 
-        // Systèmes
+        // Systems
         addSystem: (system) =>
           set((state) => {
             const newSystem = {
@@ -573,7 +573,7 @@ export const useFlatC4Store = create<FlatC4State>()(
   )
 );
 
-// Hooks utilitaires
+// Utility hooks
 export const useActiveEntities = () => {
   const store = useFlatC4Store();
 
