@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 20]
+        node-version: [18, 20, 22]
 
     steps:
       - name: Checkout code
@@ -39,6 +39,9 @@ jobs:
       - name: Run linting
         run: npm run lint
 
+      - name: Run tests
+        run: npm run test
+
       - name: Build package
         run: npm run build
 
@@ -48,37 +51,10 @@ jobs:
           echo "📦 Package contents:"
           npm pack --dry-run 2>/dev/null | grep -E "^\s+\w" || true
 
-  build-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build and test exports
-        run: |
-          npm run build
-          
-          # Test that all exports are accessible
-          echo "Testing main export..."
-          node -e "console.log(Object.keys(require('./dist/index.js')))"
-          
-          echo "Testing core export..."
-          node -e "console.log(Object.keys(require('./dist/core/index.js')))"
-          
-          echo "Testing ui export..."
-          node -e "console.log(Object.keys(require('./dist/ui/index.js')))"
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: dist/
           retention-days: 7
+        
