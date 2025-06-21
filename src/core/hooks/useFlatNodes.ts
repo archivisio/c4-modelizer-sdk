@@ -24,7 +24,7 @@ export function useFlatNodes(callbacks: NodeCallbacks = {}) {
           onEdit: () => callbacks.onEditSystem?.(sys.id),
         },
       })),
-    [model.systems, callbacks.onEditSystem]
+    [model.systems, callbacks]
   );
 
   const containerNodes: Node[] = useMemo(() => {
@@ -39,7 +39,7 @@ export function useFlatNodes(callbacks: NodeCallbacks = {}) {
         onEdit: () => callbacks.onEditContainer?.(container.id),
       },
     }));
-  }, [containers, model.activeSystemId, callbacks.onEditContainer]);
+  }, [containers, model.activeSystemId, callbacks]);
 
   const componentNodes: Node[] = useMemo(() => {
     if (!model.activeContainerId) return [];
@@ -53,7 +53,7 @@ export function useFlatNodes(callbacks: NodeCallbacks = {}) {
         onEdit: () => callbacks.onEditComponent?.(component.id),
       },
     }));
-  }, [components, model.activeContainerId, callbacks.onEditComponent]);
+  }, [components, model.activeContainerId, callbacks]);
 
   const codeNodes: Node[] = useMemo(() => {
     if (!model.activeComponentId) return [];
@@ -70,7 +70,7 @@ export function useFlatNodes(callbacks: NodeCallbacks = {}) {
   }, [
     codeElements,
     model.activeComponentId,
-    callbacks.onEditCode
+    callbacks
   ]);
 
   const currentNodes = useMemo(() => {

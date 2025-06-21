@@ -37,7 +37,10 @@ export function useFlatEdges(callbacks: EdgeCallbacks = {}) {
 
   const { containers, components, codeElements } = useFilteredEntities();
 
-  const getTechnologyColor = callbacks.getTechnologyColor || (() => '#fff');
+  const getTechnologyColor = useMemo(() => 
+    callbacks.getTechnologyColor || (() => '#fff'), 
+    [callbacks.getTechnologyColor]
+  );
 
   const markerStart = useCallback((technologyId?: string) => {
     const color = getTechnologyColor(technologyId);
