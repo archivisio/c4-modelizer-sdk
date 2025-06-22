@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Publish Packages
 
 on:
   release:
@@ -20,13 +20,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@archivisio'
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -52,30 +45,58 @@ jobs:
         if: github.event.inputs.version
         run: npm version ${{ github.event.inputs.version }} --no-git-tag-version
 
-      - name: Configure package for GitHub Packages
+      - name: Backup original files
         run: |
-          # Backup original package.json
           cp package.json package.json.backup
+          cp .npmrc .npmrc.backup
+
+      - name: Publish to npm registry
+        run: |
+          # Configure for npm registry
+          echo "registry=https://registry.npmjs.org/" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
           
-          # Update package name for GitHub Packages
+          # Remove scoped registry configuration for npm
+          npm pkg delete publishConfig
+          
+          npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Restore files and configure for GitHub Packages
+        run: |
+          # Restore original files
+          mv package.json.backup package.json
+          mv .npmrc.backup .npmrc
+          
+          # Configure package for GitHub Packages
           npm pkg set name="@archivisio/c4-modelizer-sdk"
-          
-          # Add publishConfig for GitHub Packages
           npm pkg set publishConfig.registry="https://npm.pkg.github.com"
           npm pkg set publishConfig.access="restricted"
-          
-          # Add repository field if not present
           npm pkg set repository.type="git"
           npm pkg set repository.url="git+https://github.com/archivisio/c4-modelizer-sdk.git"
+
+      - name: Setup Node.js for GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@archivisio'
 
       - name: Publish to GitHub Packages
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Restore original package.json
+      - name: Restore original files
         if: always()
-        run: mv package.json.backup package.json
+        run: |
+          if [ -f package.json.backup ]; then
+            mv package.json.backup package.json
+          fi
+          if [ -f .npmrc.backup ]; then
+            mv .npmrc.backup .npmrc
+          fi
 
   test-install:
     needs: publish

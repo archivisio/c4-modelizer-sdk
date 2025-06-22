@@ -1,5 +1,5 @@
 {
-  "name": "c4-modelizer-sdk",
+  "name": "@archivisio/c4-modelizer-sdk",
   "version": "1.0.0",
   "description": "Shared SDK for C4 Modelizer applications - Types, Zustand store and reusable hooks",
   "main": "dist/index.js",
