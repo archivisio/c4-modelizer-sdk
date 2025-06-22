@@ -1,19 +1,19 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "noEmit": false,
-    "emitDeclarationOnly": true,
+    "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "dist"
+    "emitDeclarationOnly": true,
+    "noEmit": false
   },
-  "include": ["src"],
   "exclude": [
     "node_modules", 
     "dist",
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/__tests__/**",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "vite.config.ts"
   ]
 }

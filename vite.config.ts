@@ -6,15 +6,14 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: {
-        index: resolve(__dirname, 'src/index.ts'),
-        core: resolve(__dirname, 'src/core/index.ts'),
-        ui: resolve(__dirname, 'src/ui/index.ts'),
-      },
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'C4ModelizerSDK',
       formats: ['es', 'cjs'],
-      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'esm.js' : 'js'}`
+      fileName: (format) => `index.${format === 'es' ? 'esm.js' : 'js'}`
     },
+    outDir: 'dist',
+    sourcemap: true,
+    emptyOutDir: false,
     rollupOptions: {
       external: ['react', 'react-dom', 'zustand', '@xyflow/react'],
       output: {
