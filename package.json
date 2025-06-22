@@ -16,13 +16,13 @@
     },
     "./core": {
       "types": "./dist/core/index.d.ts",
-      "import": "./dist/core/index.esm.js",
-      "require": "./dist/core/index.js"
+      "import": "./dist/core.esm.js",
+      "require": "./dist/core.js"
     },
     "./ui": {
       "types": "./dist/ui/index.d.ts",
-      "import": "./dist/ui/index.esm.js",
-      "require": "./dist/ui/index.js"
+      "import": "./dist/ui.esm.js",
+      "require": "./dist/ui.js"
     }
   },
   "files": [
@@ -38,7 +38,7 @@
     "typescript"
   ],
   "scripts": {
-    "build": "tsc -b && vite build",
+    "build": "npm run clean && tsc -p tsconfig.build.json && vite build",
     "dev": "vite build --watch",
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit",

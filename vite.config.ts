@@ -18,6 +18,8 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom', 'zustand', '@xyflow/react'],
       output: {
+        inlineDynamicImports: false,
+        manualChunks: undefined,
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',

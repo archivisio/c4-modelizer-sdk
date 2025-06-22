@@ -21,3 +21,4 @@ function useFlatStore(): {
 }
 
 export default useFlatStore;
+export { useFlatStore };
